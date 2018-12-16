@@ -1,0 +1,25 @@
+node_modules
+demo/android/.idea
+demo/android/.gradle
+*.iml
+demo/android/local.properties
+*.log
+
+## Build generated
+build/
+DerivedData
+Pods
+Podfile.lock
+*.xcuserstate
+xcuserdata
+*.hmap
+*.ipa
+package-lock.json
+yarn.lock
+lint.txt
+ip.txt
+sync.sh
+demo/ios/fegoRN.xcworkspace/xcshareddata
+dist
+.idea/
+.DS_Store
