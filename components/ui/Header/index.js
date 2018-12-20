@@ -1,3 +1,6 @@
+/**
+ * header 组件
+ */
 import React, { Component } from 'react';
 import {
   Animated,
@@ -12,7 +15,7 @@ import PropTypes from 'prop-types';
 import Sizes from '../../uitls/Sizes';
 import { ifAndroid, ifIphoneX } from '../../uitls/Utils';
 
-top = 0;
+let top = 0;
 class Header extends Component {
   static propTypes = {
     type: PropTypes.oneOf(['back', 'close']),
@@ -21,7 +24,6 @@ class Header extends Component {
 
   static defaultProps = {
     type: 'back',
-    statusBar: 'light-content',
     height: 44,
   }
 
@@ -29,7 +31,7 @@ class Header extends Component {
     super(props);
     this.opacity = new Animated.Value(0);
     this.state = {
-      title: props.translucent ? '' : this.props.title,
+      title: props.translucent ? '' : props.title,
       fontColor: 'black',
     };
   }
@@ -47,7 +49,6 @@ class Header extends Component {
   }
 
   setOpacity = (value) => {
-    const { title } = this.state;
     this.opacity.setValue(value);
     // const opacity = this.opacity._value > 100 ? 1 : this.opacity._value / 100
     // this.setState({
@@ -67,10 +68,9 @@ class Header extends Component {
       leftStyle,
       rightStyle,
       centerStyle,
-      backgroundColor,
-      position,
       height,
     } = this.props;
+    const { fontColor } = this.state;
     let paddingTop = top;
     // if (position && position == 'absolute') {
     paddingTop = ifAndroid(StatusBar.currentHeight, ifIphoneX(44, 24));
@@ -87,9 +87,9 @@ class Header extends Component {
       </TouchableOpacity>
     );
 
-    const centerComponent = typeof this.props.title === 'string' ? (
+    const centerComponent = typeof title === 'string' ? (
       <Text
-        style={[styles.title, { color: this.state.fontColor }]}
+        style={[styles.title, { color: fontColor }]}
       >
         {title}
       </Text>
