@@ -11,7 +11,7 @@ import {
   BackHandler,
   StyleSheet,
 } from 'react-native';
-import Sizes from '../../uitls/Sizes';
+import { Themes } from '../../uitls';
 
 
 export default class Modal extends Component {
@@ -145,7 +145,7 @@ export default class Modal extends Component {
     if (visible) {
       return 0;
     }
-    return animationType === 'slide-down' ? -Sizes.screenHeight : Sizes.screenHeight;
+    return animationType === 'slide-down' ? -Themes.screenHeight : Themes.screenHeight;
   }
 
   _getAlertScale = visible => (visible ? 1 : 1.2);

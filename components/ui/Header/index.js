@@ -12,8 +12,8 @@ import {
   StatusBar,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import Sizes from '../../uitls/Sizes';
 import { ifAndroid, ifIphoneX } from '../../uitls/Utils';
+import { Themes } from '../../uitls';
 
 let top = 0;
 class Header extends Component {
@@ -118,7 +118,7 @@ class Header extends Component {
                 left: 0,
                 bottom: 0,
                 zIndex: -1,
-                width: Sizes.screenWidth,
+                width: Themes.screenWidth,
                 backgroundColor: this.props.backgroundColor || 'white',
               },
               {
@@ -148,7 +148,7 @@ class Header extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: Sizes.screenWidth,
+    width: Themes.screenWidth,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
