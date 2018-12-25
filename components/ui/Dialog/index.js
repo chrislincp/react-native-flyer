@@ -12,12 +12,10 @@ import {
   Image,
 } from 'react-native';
 import RootSiblings from 'react-native-root-siblings';
-import { UIComponent } from '../../common';
 import Modal from '../Modal';
-import { tip, alert, confirm } from './tip';
 import { Themes } from '../../uitls';
 
-export default class Dialog extends UIComponent {
+export default class Dialog extends React.Component {
   static defaultProps = {
     visible: false,
     maskClosable: false,
@@ -29,6 +27,12 @@ export default class Dialog extends UIComponent {
     cancelText: '取消',
     onClose: () => { },
     showClose: false,
+    type: '',
+    confirmStyle: null,
+    okTextStyle: null,
+    cancelStyle: null,
+    cancelTextStyle: null,
+    footer: null,
   }
 
   static propTypes = {
@@ -67,21 +71,6 @@ export default class Dialog extends UIComponent {
     // dialog 大小
   }
 
-  /**
-   * 简易的提示功能
-   */
-  static tip = tip
-
-  static alert = alert
-
-  static confirm = confirm
-
-  _maskClose = () => {
-    if (this.props.maskClosable && this.props.onClose) {
-      this.props.onClose();
-    }
-  }
-
   static show = (opt = {}) => {
     const {
       onClose, ...props
@@ -102,6 +91,7 @@ export default class Dialog extends UIComponent {
         {...props}
       />
     ));
+    console.log(opt, this._modal);
   }
 
   static hide = () => {
@@ -121,20 +111,30 @@ export default class Dialog extends UIComponent {
     this.setState({ visible });
   }
 
+  onClose() {
+    this.setState({ visible: false });
+  }
+
+  _maskClose = () => {
+    const { maskClosable, onClose } = this.props;
+    if (maskClosable && onClose) {
+      onClose();
+    }
+  }
+
+
   _header(title) {
-    const { style } = this;
     return (
       <View>
-        <Text style={style.header}>{title}</Text>
+        <Text style={styles.header}>{title}</Text>
       </View>
     );
   }
 
   _children(content) {
-    const { style } = this;
     return typeof content === 'string' ? (
       <View style={{ marginBottom: 12, marginTop: 12 }}>
-        <Text style={style.content}>{content}</Text>
+        <Text style={styles.content}>{content}</Text>
       </View>
     ) : content;
   }
@@ -152,13 +152,12 @@ export default class Dialog extends UIComponent {
   }
 
   _confirmFooter() {
-    const { style, props } = this;
     const {
       okText, cancelText, onConfirm, onCancel, cancelStyle, confirmStyle, okTextStyle, cancelTextStyle,
-    } = props;
+    } = this.props;
     return (
       <View
-        style={style.footer}
+        style={styles.footer}
       >
         <TouchableOpacity
           style={[{
@@ -212,13 +211,12 @@ export default class Dialog extends UIComponent {
   }
 
   _alertFooter() {
-    const { style, props } = this;
     const {
       okText, onConfirm,
-    } = props;
+    } = this.props;
     return (
       <View
-        style={style.footer}
+        style={styles.footer}
       >
         <TouchableOpacity
           style={{
@@ -249,86 +247,62 @@ export default class Dialog extends UIComponent {
     );
   }
 
-  onClose() {
-    this.setState({ visible: false });
-  }
-
   render() {
-    const styles = this.style;
     const {
       animateWhenMount, onClose, animationType, title, content, footer, children, maskClosable, showClose,
     } = this.props;
+    const { visible } = this.state;
     const header = typeof title === 'string' ? this._header(title) : title;
     const body = content ? this._children(content) : children;
     const btns = footer || this._footer();
     return (
-      <View style={styles.container}>
-        <Modal
-          onClose={() => {
-            this.setState({ visible: false });
-            onClose && onClose();
-          }}
-          maskClosable={maskClosable}
-          animationType={animationType}
-          // style={styles.inner}
-          // contentStyle={styles.innerContent}
-          visible={this.state.visible}
-          animateWhenMount={animateWhenMount}
-          springEffect
-          styles={{
-            container: {
+      <Modal
+        onClose={() => {
+          this.setState({ visible: false });
+          onClose && onClose();
+        }}
+        maskClosable={maskClosable}
+        animationType={animationType}
+        visible={visible}
+        animateWhenMount={animateWhenMount}
+        springEffect
+        style={{ justifyContent: 'center' }}
+        contentStyle={{
+          width: '90%',
+          alignSelf: 'center',
+          borderRadius: 20,
+        }}
+      >
+        <View style={styles.body}>
+          {showClose && (
+          <TouchableOpacity
+            style={{
+              height: 44,
+              width: 44,
               justifyContent: 'center',
-            },
-            content: {
-              width: '90%',
-              alignSelf: 'center',
-              borderRadius: 20,
-            },
-          }}
-        >
-          <View style={styles.body}>
-            {showClose && (
-              <TouchableOpacity
-                style={{
-                  height: 44,
-                  width: 44,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  zIndex: 90,
-                }}
-                onPress={() => this.onClose()}
-              >
-                <Image
-                  source={require('../../images/close.png')}
-                  style={{ width: 12, height: 12 }}
-                />
-              </TouchableOpacity>)}
-            {header}
-            {body}
-            {btns}
-          </View>
-        </Modal>
-      </View>
+              alignItems: 'center',
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              zIndex: 90,
+            }}
+            onPress={() => this.onClose()}
+          >
+            <Image
+              source={require('../../images/close.png')}
+              style={{ width: 12, height: 12 }}
+            />
+          </TouchableOpacity>)}
+          {header}
+          {body}
+          {btns}
+        </View>
+      </Modal>
     );
   }
 }
 
-Dialog.baseStyle = {
-  // container: {
-  //   width: StyleSheet.screenWidth * 0.8,
-  //   backgroundColor: 'white',
-  //   flexDirection: 'column',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   borderRadius: 20,
-  //   overflow: 'hidden',
-  // },
-  container: {
-    zIndex: 1000,
-  },
+const styles = StyleSheet.create({
   // 内部样式 （即modal容器）
   inner: {
     justifyContent: 'center',
@@ -410,4 +384,4 @@ Dialog.baseStyle = {
     fontSize: 17,
     backgroundColor: 'transparent',
   },
-};
+});
