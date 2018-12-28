@@ -36,6 +36,7 @@
     "react-native-gesture-handler": "^1.0.12",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-root-siblings": "3.0.0",
+    "react-native-sortable-listview": "^0.2.8",
     "react-navigation": "3.0.6"
   },
   "devDependencies": {
