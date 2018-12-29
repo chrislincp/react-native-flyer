@@ -1,8 +1,25 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Form } from 'flyer';
 import Page from '../../components/Page';
 
 export default class Home extends Page {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: [
+        { label: 'ActivityIndicator', value: 'ActivityIndicator' },
+        { label: 'Button', value: 'Button' },
+        { label: 'Card', value: 'Card' },
+        { label: 'Dialog', value: 'Dialog' },
+        { label: 'DragList', value: 'DragList' },
+        { label: 'Form', value: 'Form' },
+        { label: 'PopMenu', value: 'PopMenu' },
+        { label: 'Toast', value: 'Toast' },
+      ],
+    };
+  }
+
   _headerProps() {
     return {
       title: '组件库',
@@ -11,9 +28,19 @@ export default class Home extends Page {
   }
 
   _render() {
+    const { list } = this.state;
     return (
       <View style={{ flex: 1 }}>
-        <Text onPress={() => this.navigator.push('Test')}>Home</Text>
+        {list.map((item, index) => (
+          <Form.Base
+            key={index}
+            title={item.label}
+            isLast={index + 1 === list.length}
+            showArrow
+            placeholder=" "
+            onPress={() => this.navigator.push(item.value)}
+          />
+        ))}
       </View>
     );
   }

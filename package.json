@@ -27,7 +27,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "ios": "react-native run-ios --project-path demo/ios",
     "android": "react-native run-android --root demo",
-    "test": "jest"
+    "test": "jest",
+    "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file './demo/index.js' --platform ios --dev false --bundle-output './demo/ios/bundle/index.ios.jsbundle' --assets-dest './demo/ios/bundle'"
   },
   "dependencies": {
     "lodash": "^4.17.11",

@@ -44,7 +44,6 @@ export default class PopMenu extends React.Component {
     const {
       pageX, pageY, locationX, locationY,
     } = e.nativeEvent;
-    console.log(e, e.nativeEvent);
     let x;
     let y;
     switch (position) {

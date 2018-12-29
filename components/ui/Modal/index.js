@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import { Themes } from '../../uitls';
 
-
 export default class Modal extends Component {
   static defaultProps = {
     visible: false,
@@ -24,6 +23,8 @@ export default class Modal extends Component {
     springEffect: false,
     onClose: () => { },
     maskStyle: {},
+    style: {},
+    contentStyle: {},
     onAnimationEnd: () => {},
   }
 
@@ -45,6 +46,8 @@ export default class Modal extends Component {
     // 动画结束回调
     onAnimationEnd: PropTypes.func,
     maskStyle: PropTypes.any,
+    style: PropTypes.any,
+    contentStyle: PropTypes.any,
   }
 
   constructor(props) {
@@ -91,7 +94,7 @@ export default class Modal extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    super.componentDidUpdate(prevProps);
+    // super.componentDidUpdate(prevProps);
     const { visible } = this.props;
     if (visible !== prevProps.visible) {
       this._animateDialog(visible);
@@ -283,7 +286,9 @@ export default class Modal extends Component {
     const {
       position, scale, opacity, modalVisible,
     } = this.state;
-    const { children, animationType, maskStyle } = this.props;
+    const {
+      children, animationType, maskStyle, style, contentStyle,
+    } = this.props;
     if (!modalVisible) {
       return null;
     }
@@ -299,7 +304,7 @@ export default class Modal extends Component {
 
     return (
       <View
-        style={[styles.container, styles.absolute]}
+        style={[styles.container, styles.absolute, style]}
       >
         <TouchableWithoutFeedback
           onPress={this._maskClose}
@@ -309,7 +314,7 @@ export default class Modal extends Component {
           />
         </TouchableWithoutFeedback>
         <Animated.View
-          style={[styles.body, animationStyleMap[animationType]]}
+          style={[styles.body, animationStyleMap[animationType], contentStyle]}
         >
           {children}
         </Animated.View>
@@ -317,11 +322,12 @@ export default class Modal extends Component {
     );
   }
 }
-
 // 基础样式
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: Themes.screenWidth,
+    height: Themes.screenHeight,
     // backgroundColor: 'rgba(0,0,0,0)',
   },
   mask: {
@@ -329,7 +335,7 @@ const styles = StyleSheet.create({
   },
   absolute: {
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 90,
     top: 0,
     bottom: 0,
     left: 0,
@@ -337,6 +343,6 @@ const styles = StyleSheet.create({
   },
   body: {
     // backgroundColor: '#FFF',
-    zIndex: 90,
+    zIndex: 99,
   },
 });
