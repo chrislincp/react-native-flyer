@@ -1,4 +1,5 @@
 import ActionSheet from './ActionSheet';
+import Badge from './Badge';
 import { BottomTabBar } from './TabBar';
 import Button from './Button';
 import Card from './Card';
@@ -39,6 +40,7 @@ export {
   // loading style end
 
   ActionSheet,
+  Badge,
   BottomTabBar,
   Button,
   Card,
