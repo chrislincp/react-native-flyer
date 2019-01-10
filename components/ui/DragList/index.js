@@ -27,11 +27,12 @@ export default class DragList extends React.Component {
   }
 
   onChange(order, data) {
+    const { onChange } = this.props;
     const arr = [];
     order.forEach((key) => {
       arr.push(data[key]);
     });
-    this.props.onChange(arr);
+    onChange(arr);
   }
 
   convertData(data) {
@@ -44,17 +45,18 @@ export default class DragList extends React.Component {
 
   render() {
     const { data } = this.state;
+    const { activeOpacity, ...props } = this.props;
     const order = Object.keys(data);
     return (
       <SortableListView
         data={data}
         order={order}
-        activeOpacity={this.props.activeOpacity}
+        activeOpacity={activeOpacity}
         onRowMoved={(e) => {
           order.splice(e.to, 0, order.splice(e.from, 1)[0]);
           this.onChange(order, data);
         }}
-        {...this.props}
+        {...props}
       />
     );
   }

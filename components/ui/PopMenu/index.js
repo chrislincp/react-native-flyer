@@ -96,7 +96,6 @@ export default class PopMenu extends React.Component {
   }
 
   onChange(item, index) {
-    console.log('onchange', item, index);
     const { onChange } = this.props;
     this._modal.destroy();
     onChange(item, index);
