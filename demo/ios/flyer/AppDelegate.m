@@ -15,9 +15,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
-  
+#ifdef DEBUG
+  //开发包
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"demo/index" fallbackResource:nil];
-//  jsCodeLocation = [NSURL URLWithString:@"http://192.168.21.163:8081/demo/index.bundle?platform=ios&dev=false&minify=true"];
+  //  jsCodeLocation = [NSURL URLWithString:@"http://192.168.21.163:8081/demo/index.bundle?platform=ios&dev=false&minify=true"];
+#else
+  //离线包
+  
+//  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"demo/ios/bundle/index.ios" withExtension:@"jsbundle"];
+#endif
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"flyer"
