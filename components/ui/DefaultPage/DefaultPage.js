@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import ImageSource from './ImageSource';
 import { Themes } from '../../uitls';
 
-export default class ErrorPage extends React.Component {
+export default class DefaultPage extends React.Component {
   static propTypes = {
     title: PropTypes.string,
     buttonText: PropTypes.string,
