@@ -1,3 +1,3 @@
 # flyer
 
-a react-native ui-components pro
+a react-native ui-components repo
