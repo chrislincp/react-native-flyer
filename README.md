@@ -1,3 +1,3 @@
 # flyer
 
-yarn ios/android 打开项目
+a react-native ui-components repo
