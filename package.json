@@ -1,5 +1,5 @@
 {
-  "name": "flyer",
+  "name": "react-native-flyer",
   "version": "0.0.1",
   "author": "LinCP",
   "main": "components/index",
@@ -12,10 +12,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/chrislincp/flyer"
+    "url": "https://github.com/chrislincp/react-native-flyer"
   },
   "bugs": {
-    "url": "https://github.com/chrislincp/flyer/issues"
+    "url": "https://github.com/chrislincp/react-native-flyer/issues"
   },
   "files": [
     "components",
@@ -65,5 +65,7 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "description": "a react-native ui-components repo",
+  "homepage": "https://github.com/chrislincp/react-native-flyer#readme"
 }
