@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { Popup, Button } from 'flyer';
 import Page from '../../../components/Page';
 
-export default class PopMenuPage extends Page {
+export default class PopupPage extends Page {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +12,7 @@ export default class PopMenuPage extends Page {
 
   _headerProps() {
     return {
-      title: 'PopMenu',
+      title: 'Popup',
     };
   }
 
