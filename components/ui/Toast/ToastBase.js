@@ -17,22 +17,22 @@ const notice = (content, opt) => {
     this._toast = null;
   }
 
-  this._toast = new RootSiblings((
-    <ToastContainer
-      {...opt}
-      content={content}
-      onAnimationEnd={animationEnd}
-    />
-  ));
-  // setTimeout(() => {
-  //   this._toast = new RootSiblings((
-  //     <ToastContainer
-  //       {...opt}
-  //       content={content}
-  //       onAnimationEnd={animationEnd}
-  //     />
-  //   ));
-  // });
+  // this._toast = new RootSiblings((
+  //   <ToastContainer
+  //     {...opt}
+  //     content={content}
+  //     onAnimationEnd={animationEnd}
+  //   />
+  // ));
+  setTimeout(() => {
+    this._toast = new RootSiblings((
+      <ToastContainer
+        {...opt}
+        content={content}
+        onAnimationEnd={animationEnd}
+      />
+    ));
+  });
 };
 
 export default {

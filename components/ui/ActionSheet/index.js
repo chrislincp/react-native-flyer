@@ -224,7 +224,7 @@ export default class ActionSheet extends React.Component {
         springEffect={false}
         animationType="slide"
         style={{ justifyContent: 'flex-end' }}
-        contentStyle={{
+        bodyStyle={{
           width: '90%',
           backgroundColor: '#fff',
           alignSelf: 'center',

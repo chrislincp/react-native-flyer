@@ -29,6 +29,29 @@ export default class PopMenu extends React.Component {
     value: PropTypes.string,
   }
 
+  static show = (opt = {}) => {
+    if (this._modal) {
+      this._modal.destroy();
+      this._modal = null;
+    }
+
+    this._popmenuOpt = opt;
+
+    this._modal = new RootSiblings((
+      <Modal
+        visible
+        {...opt}
+      />
+    ));
+  }
+
+  static hide = (opt) => {
+    if (!this._modal) return;
+    const hideOpt = opt || this._popmenuOpt || {};
+    const visible = false;
+    this._modal.update(<Modal visible={visible} {...hideOpt} />);
+  }
+
   constructor(props) {
     super(props);
     this.ModalWidth = 112;
@@ -60,34 +83,28 @@ export default class PopMenu extends React.Component {
       default:
         break;
     }
-    if (this._modal) {
-      this._modal.destroy();
-      this._modal = null;
-    }
-    this._modal = new RootSiblings((
-      <Modal
-        maskStyle={{ opacity: ifAndroid(0.6, 0) }}
-        contentStyle={{
-          width: this.ModalWidth,
-          position: 'absolute',
-          top: y + offsetY,
-          left: x + offsetX,
-          shadowColor: '#000',
-          shadowOpacity: 0.15,
-          shadowRadius: 10,
-          elevation: 4,
-          shadowOffset: { w: 0, h: 3 },
-        }}
-        animateWhenMount
-        visible
-        onClose={() => {
-          this._modal.destroy();
-          this._modal = null;
-        }}
-      >
-        {this.renderContent(x, y)}
-      </Modal>
-    ));
+
+    const opt = {
+      maskStyle: { opacity: ifAndroid(0.6, 0) },
+      bodyStyle: {
+        width: this.ModalWidth,
+        position: 'absolute',
+        top: y + offsetY,
+        left: x + offsetX,
+        shadowColor: '#000',
+        shadowOpacity: 0.15,
+        shadowRadius: 10,
+        elevation: 4,
+        shadowOffset: { w: 0, h: 3 },
+      },
+      animateWhenMount: true,
+      onClose: () => {
+        PopMenu.hide();
+      },
+      children: this.renderContent(x, y),
+    };
+
+    PopMenu.show(opt);
   }
 
   onLayout(e) {
@@ -97,8 +114,8 @@ export default class PopMenu extends React.Component {
 
   onChange(item, index) {
     const { onChange } = this.props;
-    this._modal.destroy();
     onChange(item, index);
+    PopMenu.hide();
   }
 
 

@@ -267,7 +267,7 @@ export default class Dialog extends React.Component {
         animateWhenMount={animateWhenMount}
         springEffect
         style={{ justifyContent: 'center' }}
-        contentStyle={{
+        bodyStyle={{
           width: '90%',
           alignSelf: 'center',
           borderRadius: 20,
