@@ -22,9 +22,9 @@
     ".babelrc"
   ],
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "node node_modules/react-native/local-cli/cli.js start --port=8888",
     "ios": "react-native run-ios --project-path demo/ios",
     "android": "react-native run-android --root demo",
     "test": "jest",

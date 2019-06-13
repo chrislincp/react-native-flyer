@@ -3,6 +3,7 @@ import CardPage from '../src/components/Card';
 import DialogPage from '../src/components/Dialog';
 import FormPage from '../src/components/Form';
 import PopMenuPage from '../src/components/PopMenu';
+import PopupPage from '../src/components/Popup';
 import ActivityIndicatorPage from '../src/components/ActivityIndicator';
 import ToastPage from '../src/components/Toast';
 import DragListPage from '../src/components/DragList';
@@ -15,6 +16,7 @@ const routes = {
   DragList: { screen: DragListPage },
   Form: { screen: FormPage },
   PopMenu: { screen: PopMenuPage },
+  Popup: { screen: PopupPage },
   Toast: { screen: ToastPage },
 };
 

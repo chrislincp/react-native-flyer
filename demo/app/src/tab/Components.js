@@ -15,6 +15,7 @@ export default class Home extends Page {
         { label: 'DragList', value: 'DragList' },
         { label: 'Form', value: 'Form' },
         { label: 'PopMenu', value: 'PopMenu' },
+        { label: 'Popup', value: 'Popup' },
         { label: 'Toast', value: 'Toast' },
       ],
     };

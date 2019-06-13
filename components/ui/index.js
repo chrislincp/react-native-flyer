@@ -9,6 +9,7 @@ import Form from './Form';
 import Header from './Header';
 import Input from './Input';
 import Modal from './Modal';
+import Popup from './Popup';
 import PopMenu from './PopMenu';
 import Toast from './Toast';
 import {
@@ -49,6 +50,7 @@ export {
   Form,
   Header,
   Modal,
+  Popup,
   PopMenu,
   Input,
   Toast,
